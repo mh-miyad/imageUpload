@@ -26,7 +26,7 @@ export default function Home() {
         fileSize,
         img: imgBase64,
       };
-
+      getAllImage();
       sendData(imgObject);
       setFile(imgBase64);
     };
@@ -53,37 +53,42 @@ export default function Home() {
       console.log(error);
     }
   };
-  getAllImage();
   return (
-    <main className="flex h-screen items-center justify-center flex-col">
-      <form
-        onSubmit={handleForm}
-        action="#"
-        method="post"
-        className="flex flex-col gap-5 border-2 p-10 rounded-md shadow-sm"
-      >
-        <label
-          htmlFor="fileUpload"
-          className="label capitalize text-2xl font-semibold"
+    <main className=" ">
+      <div className="flex mt-20 justify-center">
+        <form
+          onSubmit={handleForm}
+          action="#"
+          method="post"
+          className="flex flex-col gap-5 border-2 p-10 rounded-md shadow-sm"
         >
-          Upload file
-        </label>
-        <input
-          type="file"
-          name="fileUpload"
-          id="fileUpload"
-          className="file-input file-input-bordered w-full max-w-xs"
-        />
-        <input type="submit" className="btn" />
-      </form>
-      <>
+          <label
+            htmlFor="fileUpload"
+            className="label capitalize text-2xl font-semibold"
+          >
+            Upload file
+          </label>
+          <input
+            type="file"
+            name="fileUpload"
+            id="fileUpload"
+            className="file-input file-input-bordered w-full max-w-xs"
+          />
+          <input type="submit" className="btn" />
+        </form>
+      </div>
+      <div className="flex flex-wrap gap-10 justify-center">
         {allImage.map((img: any) => {
           return (
-            <div className="max-w-md mt-10 border p-5 relative" key={img._id}>
+            <div
+              className="max-w-md max-h-[500px] h-full overflow-hidden overflow-y-auto mt-10 border p-5 relative"
+              key={img._id}
+            >
               <Image
                 src={img.img || "https://picsum.photos/200"}
-                width={500}
-                height={250}
+                className="rounded-md mx-auto"
+                width={1000}
+                height={500}
                 alt=""
               />
               <div className="absolute top-0 right-0">
@@ -111,7 +116,7 @@ export default function Home() {
             </div>
           );
         })}
-      </>
+      </div>
     </main>
   );
 }
